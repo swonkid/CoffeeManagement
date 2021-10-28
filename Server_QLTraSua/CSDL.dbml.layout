@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CSDL">
+  <DataContextMoniker Name="/CSDLDataContext" />
+  <nestedChildShapes>
+    <classShape Id="1fc34b1f-e117-4077-9d69-20f85b962bbf" absoluteBounds="3.5, 4.25, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/CSDLDataContext/Ban" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dbc1dd31-e588-4b49-8a9f-3dc657b3ff6f" absoluteBounds="3.515, 4.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4bc88b78-4491-4ae5-a796-8b6a5c6521e5" absoluteBounds="6.25, 3.875, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/CSDLDataContext/CTHoaDon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4648e523-4bd8-45b5-a159-ef784f80bcf0" absoluteBounds="6.265, 4.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9ddfb9f9-cae7-40d8-ae71-f5fd1f598a1a" absoluteBounds="6.25, 0.875, 2, 1.7708968098958333">
+      <DataClassMoniker Name="/CSDLDataContext/HoaDon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="195e89dd-094d-4fd2-8cf3-973bbb023d46" absoluteBounds="6.265, 1.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a1cd5c18-e465-4a56-b185-5e8fbe13e5da" absoluteBounds="0.75, 1.25, 2, 1.1939925130208338">
+      <DataClassMoniker Name="/CSDLDataContext/LoaiMon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e8d0d685-faa7-4f49-81bd-439b7aff1cf7" absoluteBounds="0.765, 1.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="177cb298-727a-4e77-ab90-3a40d5be4019" absoluteBounds="3.5, 0.875, 2, 1.7708968098958333">
+      <DataClassMoniker Name="/CSDLDataContext/Mon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b05435dd-f944-4a39-a5e2-d53e9a5ddda2" absoluteBounds="3.515, 1.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ce3555d6-7ca6-45cd-83b1-e9dd760370a1" absoluteBounds="0.75, 6.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/CSDLDataContext/Taikhoan" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7ae2e0dd-02be-449f-924c-b215a8e2b488" absoluteBounds="0.765, 7.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 4.84699625651042); (6.25 : 4.84699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CSDLDataContext/Ban/Ban_CTHoaDon" />
+      <nodes>
+        <classShapeMoniker Id="1fc34b1f-e117-4077-9d69-20f85b962bbf" />
+        <classShapeMoniker Id="4bc88b78-4491-4ae5-a796-8b6a5c6521e5" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.25); (5.875 : 3.875); (5.875 : 1.76044840494792); (6.25 : 1.76044840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CSDLDataContext/Ban/Ban_HoaDon" />
+      <nodes>
+        <classShapeMoniker Id="1fc34b1f-e117-4077-9d69-20f85b962bbf" />
+        <classShapeMoniker Id="9ddfb9f9-cae7-40d8-ae71-f5fd1f598a1a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 1.25522420247396); (6.25 : 1.25522420247396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CSDLDataContext/Mon/Mon_HoaDon" />
+      <nodes>
+        <classShapeMoniker Id="177cb298-727a-4e77-ab90-3a40d5be4019" />
+        <classShapeMoniker Id="9ddfb9f9-cae7-40d8-ae71-f5fd1f598a1a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 1.84699625651042); (3.5 : 1.84699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/CSDLDataContext/LoaiMon/LoaiMon_Mon" />
+      <nodes>
+        <classShapeMoniker Id="a1cd5c18-e465-4a56-b185-5e8fbe13e5da" />
+        <classShapeMoniker Id="177cb298-727a-4e77-ab90-3a40d5be4019" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

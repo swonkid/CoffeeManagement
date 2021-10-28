@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLQuanTS" Class="CSDLDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=QLQuanTS;User ID=sa" SettingsObjectName="Server_QLTraSua.Properties.Settings" SettingsPropertyName="QLQuanTSConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Ban" Member="Bans">
+    <Type Name="Ban">
+      <Column Name="MaBan" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenBan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Ban_CTHoaDon" Member="CTHoaDons" ThisKey="MaBan" OtherKey="MaBan" Type="CTHoaDon" />
+      <Association Name="Ban_HoaDon" Member="HoaDons" ThisKey="MaBan" OtherKey="MaBan" Type="HoaDon" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CTHoaDon" Member="CTHoaDons">
+    <Type Name="CTHoaDon">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TongTien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Ban_CTHoaDon" Member="Ban" ThisKey="MaBan" OtherKey="MaBan" Type="Ban" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HoaDon" Member="HoaDons">
+    <Type Name="HoaDon">
+      <Column Name="MaBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaMon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DonGia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="Ban_HoaDon" Member="Ban" ThisKey="MaBan" OtherKey="MaBan" Type="Ban" IsForeignKey="true" />
+      <Association Name="Mon_HoaDon" Member="Mon" ThisKey="MaMon" OtherKey="MaMon" Type="Mon" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoaiMon" Member="LoaiMons">
+    <Type Name="LoaiMon">
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="LoaiMon_Mon" Member="Mons" ThisKey="MaLoai" OtherKey="MaLoai" Type="Mon" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Mon" Member="Mons">
+    <Type Name="Mon">
+      <Column Name="MaMon" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Mon_HoaDon" Member="HoaDons" ThisKey="MaMon" OtherKey="MaMon" Type="HoaDon" />
+      <Association Name="LoaiMon_Mon" Member="LoaiMon" ThisKey="MaLoai" OtherKey="MaLoai" Type="LoaiMon" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Taikhoan" Member="Taikhoans">
+    <Type Name="Taikhoan">
+      <Column Name="TaiKhoan" Member="TaiKhoan1" Type="System.String" DbType="VarChar(25) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MatKhau" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.chuyenban" Method="chuyenban">
+    <Parameter Name="mb1" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mb2" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.cthd" Method="cthd">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ngaylap" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="tongien" Type="System.Double" DbType="Float" />
+    <Parameter Name="khuyenmai" Type="System.Double" DbType="Float" />
+    <Parameter Name="ttoan" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.dangky" Method="dangky">
+    <Parameter Name="tk" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="mk" Type="System.String" DbType="VarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.dangnhap" Method="dangnhap">
+    <Parameter Name="tk" Type="System.String" DbType="VarChar(25)" />
+    <Parameter Name="mk" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="dangnhapResult">
+      <Column Name="TaiKhoan" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="MatKhau" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.datmon" Method="datmon">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mm" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sl" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dg" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.dsban" Method="dsban">
+    <ElementType Name="dsbanResult">
+      <Column Name="MaBan" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenBan" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.dsloai" Method="dsloai">
+    <ElementType Name="dsloaiResult">
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.dsmon" Method="dsmon">
+    <ElementType Name="dsmonResult">
+      <Column Name="MaMon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.huyban" Method="huyban">
+    <Parameter Name="tb" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.loadcthd" Method="loadcthd">
+    <ElementType Name="loadcthdResult">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TongTien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.loadhdtheongay" Method="loadhdtheongay">
+    <Parameter Name="ng" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="loadhdtheongayResult">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TongTien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.loadhdtheothang" Method="loadhdtheothang">
+    <Parameter Name="ng" Type="System.Int32" DbType="Int" />
+    <ElementType Name="loadhdtheothangResult">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TongTien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.loadtheonam" Method="loadtheonam">
+    <Parameter Name="ng" Type="System.Int32" DbType="Int" />
+    <ElementType Name="loadtheonamResult">
+      <Column Name="MaHD" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MaBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TongTien" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.loadtk" Method="loadtk">
+    <Parameter Name="tk" Type="System.String" DbType="VarChar(25)" />
+    <ElementType Name="loadtkResult">
+      <Column Name="TaiKhoan" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.menutheoloai" Method="menutheoloai">
+    <Parameter Name="ml" Type="System.Int32" DbType="Int" />
+    <ElementType Name="menutheoloaiResult">
+      <Column Name="MaMon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MaLoai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.nhapmon" Method="nhapmon">
+    <Parameter Name="tm" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="gia" Type="System.Double" DbType="Float" />
+    <Parameter Name="ml" Type="System.Int32" DbType="Int" />
+    <Parameter Name="km" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.showdsmon" Method="showdsmon">
+    <ElementType Name="showdsmonResult">
+      <Column Name="MaMon" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="KhuyenMai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.showhd1" Method="showhd1">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <ElementType Name="showhd1Result">
+      <Column Name="TenMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DonGia" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.showhdban" Method="showhdban">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <ElementType Name="showhdbanResult">
+      <Column Name="STT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenMon" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DonGia" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sualoai" Method="sualoai">
+    <Parameter Name="tl" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="ml" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.suamon" Method="suamon">
+    <Parameter Name="tm" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="gia" Type="System.Double" DbType="Float" />
+    <Parameter Name="ml" Type="System.Int32" DbType="Int" />
+    <Parameter Name="km" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mm" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.tachban" Method="tachban">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stt" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.tachban2" Method="tachban2">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <Parameter Name="stt" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sl" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.tachban3" Method="tachban3">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mm" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sl" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dg" Type="System.Double" DbType="Float" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.themban" Method="themban">
+    <Parameter Name="tb" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.themloai" Method="themloai">
+    <Parameter Name="tl" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.tramon" Method="tramon">
+    <Parameter Name="stt" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.xoaban" Method="xoaban">
+    <Parameter Name="mb" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.xoaloai" Method="xoaloai">
+    <Parameter Name="tl" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.xoamon" Method="xoamon">
+    <Parameter Name="tm" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.suatenban" Method="suatenban">
+    <Parameter Name="tbc" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="tbm" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
